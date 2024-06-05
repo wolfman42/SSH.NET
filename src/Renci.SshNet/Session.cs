@@ -643,6 +643,9 @@ namespace Renci.SshNet
                 ConnectionInfo.Authenticate(this, _serviceFactory);
                 _isAuthenticated = true;
 
+                // Start listening for global requests in order to handle client alive messages sent by server
+                GlobalRequestReceived += GlobalRequests.GlobalRequestHandler;
+
                 // Register Connection messages
                 RegisterMessage("SSH_MSG_REQUEST_SUCCESS");
                 RegisterMessage("SSH_MSG_REQUEST_FAILURE");
@@ -768,6 +771,9 @@ namespace Renci.SshNet
 
                 ConnectionInfo.Authenticate(this, _serviceFactory);
                 _isAuthenticated = true;
+
+                // Start listening for global requests in order to handle client alive messages sent by server
+                GlobalRequestReceived += GlobalRequests.GlobalRequestHandler;
 
                 // Register Connection messages
                 RegisterMessage("SSH_MSG_REQUEST_SUCCESS");
